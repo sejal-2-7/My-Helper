@@ -1,3 +1,5 @@
+##################################Code Doesn't work#####################################################
+
 #import speech recognition package from google api
 import speech_recognition as sr
 import playsound #to play mp3 local files
