@@ -2,29 +2,29 @@
 
 #import speech recognition package from google api
 import speech_recognition as sr
-import playsound #to play mp3 local files
-import gTTs #google text to speech
-import os  #to save/open files
-import wolframalpha #to conduct mathematical calc
-from selenium import webdriver #to control web operations
+import playsound  # to play mp3 local files
+import gTTs  # google text to speech
+import os  # to save/open files
+import wolframalpha  # to conduct mathematical calc
+from selenium import webdriver  # to control web operations
 
-#tts = gtts.tts.gTTS(text='Hello', lang='en')
-#tts.save("hello.mp3")
+# tts = gtts.tts.gTTS(text='Hello', lang='en')
+# tts.save("hello.mp3")
 num=1
 def assistant_speaks(output):
     global num
     
-#num to rename audio files with different names to remove ambiguity
+# num to rename audio files with different names to remove ambiguity
     num+=1
     print("Panda: ", output)
 
     toSpeak=gTTs(text = output, lang = 'en', slow = False)
-#saving the audio file given by google text to speech
+# saving the audio file given by google text to speech
     file = str(num)+".mp3"
     toSpeak.save(file)
     
 
-#playsound package used to play the same file
+# playsound package used to play the same file
     playsound.playsound(file,True)
     os.remove(file)
 
@@ -35,7 +35,7 @@ def get_audio():
     with sr.Microphone() as source:
         print("Speak...")
         
-        #recording the audio using speech recognition
+        # recording the audio using speech recognition
         audio = rObject.listen(source,phrase_time_limit=5)
     print("Stop") #time limit is 5
     try:
@@ -48,7 +48,7 @@ def get_audio():
         assistant_speaks("Could not understand the audio, please speak again!")
         return 0
     
-#driver code
+# driver code
 if __name__ == "__main__":
     assistant_speaks("What's your name, human?")
     name = 'Human'
@@ -65,7 +65,7 @@ if __name__ == "__main__":
              assistant_speaks("Ok bye"+name+".")
              break
          
-         #calling process text to process the query
+         # calling process text to process the query
          process_text(text)
         
 #########################################################################################################
@@ -75,7 +75,7 @@ def process_text(input):
     try:
         
         if "search" in input or "play" in input:
-            #a web search using selenium
+            # a web search using selenium
             search_web(input)
             return
         
@@ -93,7 +93,7 @@ def process_text(input):
             return
         
         elif "calculate" in input.lower():
-                #wolrfram alpha id
+                # wolrfram alpha id
                 app_id = "A5HVRL-2XJU4KT6V7"
                 client = wolframalpha.Client(app_id)
                 
@@ -105,7 +105,7 @@ def process_text(input):
                 return
             
         elif 'open' in input:
-            #different applications to open
+            # different applications to open
             open_application(input.lower())
             return
         
